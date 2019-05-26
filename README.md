@@ -30,22 +30,21 @@ export PATH=$NODE_HOME/bin:$PATH
 
 2. run    
 > npm run dev  
-``` 
-OR
-```
+OR  
 > npm run dev &lt;port&gt;
 ```
+
 
 ####   Commands:
 
     help [command...]    Provides help for a given command.
     exit                 Exits application.
-    balance              Check balance
-    pub                  Check local address
-    detail <index>       Show block detail
-    mine                 Generate a new block
-    blockChain           Show chain
-    peers                Show peer list
-    trans <to> <amount>  Make a transfer to: receiver address, amount: value
-    chat <msg>           Send broadcast
-    pending              Show pending transfer
+    balance              Check balance.
+    pub                  Check local address.
+    detail <index>       Show block detail.
+    mine                 Generate a new block.
+    blockChain           Show chain.
+    peers                Show peer list.
+    trans <to> <amount>  Make a transfer to: receiver address, amount: value.
+    chat <msg>           Send broadcast.
+    pending              Show pending transfer.
