@@ -29,9 +29,12 @@ export PATH=$NODE_HOME/bin:$PATH
 > npm install
 
 2. run    
-> npm run dev   
+> npm run dev  
+``` 
 OR
-> npm run dev <port>
+```
+> npm run dev &lt;port&gt;
+```
 
 ####   Commands:
 
