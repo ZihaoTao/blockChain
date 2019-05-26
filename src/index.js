@@ -2,7 +2,7 @@
 * @Author: tino
 * @Date:   2019-05-24 17:34:50
 * @Last Modified by:   Zihao Tao
-* @Last Modified time: 2019-05-25 17:06:20
+* @Last Modified time: 2019-05-25 17:37:54
 */
 const vorpal = require('vorpal')();
 const BlockChain = require('./block-chain');
@@ -39,6 +39,7 @@ vorpal
             }
             callback();
           });
+
 vorpal
   .command('pub', 'Check local address')
   .action(function(args, callback){
@@ -103,8 +104,6 @@ vorpal
             formatLog(blockChain.data);
             callback();
           });
-
-
 
 vorpal.exec('help');
 vorpal.delimiter('Chain => ').show();

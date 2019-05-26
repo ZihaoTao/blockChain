@@ -1,8 +1,8 @@
 /*
 * @Author: tino
 * @Date:   2019-05-24 19:50:51
-* @Last Modified by:   tino
-* @Last Modified time: 2019-05-25 16:10:14
+* @Last Modified by:   Zihao Tao
+* @Last Modified time: 2019-05-25 17:37:48
 */
 let fs = require('fs');
 let EC = require('elliptic').ec;
@@ -10,15 +10,17 @@ let ec = EC('secp256k1');
 let keyPair = ec.genKeyPair();
 let keys = generateKeys();
 
+// generate keys based on wallet.json, it there is no wallet.json, create a new one
 function generateKeys() {
   let fileName = './wallet.json';
   try {
     let res = JSON.parse(fs.readFileSync(fileName));
+    // check if public key can be retrieved from private key
     if(res.prv && res.pub && getPub(res.prv) === res.pub) {
       keyPair = ec.keyFromPrivate(res.prv);
       return res;
     } else {
-      throw 'Invalid wallet.json';
+      throw new Error('Invalid wallet.json');
     }
   } catch(error) {
     let res = {
@@ -30,15 +32,18 @@ function generateKeys() {
   }
 }
 
+// get public key
 function getPub(prv) {
   return ec.keyFromPrivate(prv).getPublic('hex').toString();
 }
 
+// make signature
 function sign({from, to, amount, timestamp}) {
   let bufferMsg = Buffer.from(`${timestamp} - ${amount} - ${from} - ${to}`);
   return Buffer.from(keyPair.sign(bufferMsg).toDER()).toString('hex');
 }
 
+//verify sendings based on public key
 function verify({from, to, amount, timestamp, signature}, pub) {
   let keyPairTemp = ec.keyFromPublic(pub, 'hex');
   let bufferMsg = Buffer.from(`${timestamp} - ${amount} - ${from} - ${to}`);
@@ -46,12 +51,3 @@ function verify({from, to, amount, timestamp, signature}, pub) {
 }
 
 module.exports = {sign, verify, keys};
-
-// let trans = {from: 'dd', to: 'ds', amount: 100};
-// let trans1 = {from: 'dd1', to: 'ds', amount: 100};
-// let signature = sign(trans);
-// trans.signature = signature;
-// trans1.signature = signature;
-// console.log(signature);
-// console.log(verify(trans1, keyPair.getPublic('hex').toString()));
-
