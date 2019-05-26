@@ -2,7 +2,7 @@
 * @Author: tino
 * @Date:   2019-05-24 16:22:49
 * @Last Modified by:   Zihao Tao
-* @Last Modified time: 2019-05-26 11:41:08
+* @Last Modified time: 2019-05-26 11:43:57
 */
 const crypto = require('crypto');
 const dgram = require('dgram');
@@ -50,7 +50,7 @@ class BlockChain {
     });
     this.udp.on('listening', () => {
       let address = this.udp.address();
-      console.log('[Message] Listening port: ' + address.port);
+      console.log('[Message] Listening Port: ' + address.port);
     });
     console.log('[Message] ' + process.argv);
     let port = Number(process.argv[2]) || 0;
@@ -128,7 +128,7 @@ class BlockChain {
       case 'sayHi': 
         let remotePeer = action.data;
         this.peers.push(remotePeer);
-        console.log('[Message] Add new peer: ' + JSON.stringify(remotePeer));
+        console.log('[Message] Add New Peer: ' + JSON.stringify(remotePeer));
         this.send({
           type: 'hi',
           data: 'Hi'
@@ -146,7 +146,7 @@ class BlockChain {
         }
         // if the new block is valid
         if(this.isValidBlock(action.data)) {
-          console.log(`[Message] Someone made a successful mining.`);
+          console.log(`[Message] Someone Made a Successful Mining.`);
           this.blockChain.push(action.data);
           this.data = [];
           this.broadcast({
@@ -154,13 +154,13 @@ class BlockChain {
             data: action.data
           });
         } else {
-          console.log('[Error] Invalid Mine');
+          console.log('[Error] Invalid Mining');
         }
         break;
 
       case 'trans':
         if(!this.data.find(v => this.isEqualObject(v, action.data))) {
-          console.log('New transfer');
+          console.log('[Message] New Transfer.');
           this.addTrans(action.data);
           this.broadcast({
             type: 'trans',
@@ -170,7 +170,7 @@ class BlockChain {
         break;
       
       default:
-        console.log('[Error] Wrong action.', remote);
+        console.log('[Error] Wrong Action.', remote);
     }
   }
 
@@ -179,7 +179,7 @@ class BlockChain {
     if(this.isValidTrans(trans)) {
       this.data.push(trans);
     } else {
-      console.log('[Error] Invalid Transfer');
+      console.log('[Error] Invalid Transfer.');
     }
   }
 
@@ -230,7 +230,7 @@ class BlockChain {
     if(from !== '0') {
       let balance = this.balance(from);
       if(balance < amount) {
-        console.log("[Message] Not enough balance.", from, balance, amount);
+        console.log("[Message] Not Enough Balance.", from, balance, amount);
         return;
       }
       this.broadcast({
@@ -284,13 +284,13 @@ class BlockChain {
     if(this.isValidBlock(newBlock) && this.isValidChain()) {
       this.blockChain.push(newBlock);
       this.data = [];
-      console.log('[Message] Mine Success');
+      console.log('[Message] Mining Success.');
       this.broadcast({
         type: 'mine',
         data: newBlock
       });
     } else {
-      console.log('[Error] Invalid Block', newBlock);
+      console.log('[Error] Invalid Block.', newBlock);
     }
     return newBlock;
   }
@@ -357,7 +357,7 @@ class BlockChain {
     if(this.isValidChain(newChain) && newChain.length > this.blockChain.length) {
       this.blockChain = JSON.parse(JSON.stringify(newChain));
     } else {
-      console.log('[Error] invalid chain');
+      console.log('[Error] Invalid Chain.');
     }
   }
   
