@@ -44,5 +44,5 @@ OR
     blockChain           Show chain
     peers                Show peer list
     trans <to> <amount>  make a transfer to: receiver address, amount: value
-    chat <msg>           Show peer list
+    chat <msg>           Send broadcast
     pending              Show pending transfer

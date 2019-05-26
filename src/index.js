@@ -2,7 +2,7 @@
 * @Author: tino
 * @Date:   2019-05-24 17:34:50
 * @Last Modified by:   Zihao Tao
-* @Last Modified time: 2019-05-25 17:37:54
+* @Last Modified time: 2019-05-25 20:34:35
 */
 const vorpal = require('vorpal')();
 const BlockChain = require('./block-chain');
@@ -81,7 +81,7 @@ vorpal
 
 
 vorpal
-  .command('trans <to> <amount>', 'make a transfer')
+  .command('trans <to> <amount>', 'Make a transfer')
   .action(function(args, callback){
             let trans = blockChain.transfer(rsa.keys.pub, args.to, args.amount);
             if(trans) formatLog(trans);
@@ -89,7 +89,7 @@ vorpal
           });
 
 vorpal
-  .command('chat <msg>', 'Show peer list')
+  .command('chat <msg>', 'Send broadcast')
   .action(function(args, callback){
             formatLog(blockChain.broadcast({
               type: 'hi',
