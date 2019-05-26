@@ -1,8 +1,8 @@
 /*
 * @Author: tino
 * @Date:   2019-05-24 16:22:49
-* @Last Modified by:   tino
-* @Last Modified time: 2019-05-25 16:50:19
+* @Last Modified by:   Zihao Tao
+* @Last Modified time: 2019-05-25 17:04:10
 */
 
 // [
@@ -36,7 +36,7 @@ class BlockChain {
     this.difficulty = 4;
     this.peers = [];
     this.remote = '';
-    this.seed = {address: 'localhost', port: 8002};
+    this.seed = {address: '47.254.23.123', port: 8002};
     this.udp = dgram.createSocket('udp4');
     this.init();
   }
