@@ -43,6 +43,6 @@ OR
     mine                 Generate a new block
     blockChain           Show chain
     peers                Show peer list
-    trans <to> <amount>  make a transfer to: receiver address, amount: value
+    trans <to> <amount>  Make a transfer to: receiver address, amount: value
     chat <msg>           Send broadcast
     pending              Show pending transfer
