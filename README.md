@@ -1,7 +1,7 @@
 # blockChain
 BlockChain Built by Node.js
 
-##### Installation
+#### Installation
 1. nodejs(6.14.1)
 * website:https://nodejs.org/en/download/releases/
 ```
@@ -23,7 +23,7 @@ export PATH=$NODE_HOME/bin:$PATH
 > source /etc/profile
 ```
 
-##### Deployment
+#### Deployment
 1. initialization  
 > cd blockChain  
 > npm install
