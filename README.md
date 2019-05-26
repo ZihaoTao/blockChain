@@ -1,5 +1,5 @@
 # blockChain
-BlockChain Built by Node.js
+BlockChain by Node.js
 
 ### Installation
 1. nodejs(6.14.1)
@@ -42,6 +42,6 @@ OR
     mine                 Generate a new block.
     blockChain           Show chain.
     peers                Show peer list.
-    trans <to> <amount>  Make a transfer to: receiver address, amount: value.
+    trans <to> <amount>  Make a transfer. <to> receiver address  <amount> value
     chat <msg>           Send broadcast.
     pending              Show pending transfer.
