@@ -2,7 +2,7 @@
 * @Author: tino
 * @Date:   2019-05-24 17:34:50
 * @Last Modified by:   Zihao Tao
-* @Last Modified time: 2019-05-25 20:34:35
+* @Last Modified time: 2019-05-26 11:37:29
 */
 const vorpal = require('vorpal')();
 const BlockChain = require('./block-chain');
@@ -31,7 +31,7 @@ function formatLog(data) {
 }
 
 vorpal
-  .command('balance', 'Check balance')
+  .command('balance', 'Check balance.')
   .action(function(args, callback){
             let balance = blockChain.balance(rsa.keys.pub);
             if(balance) {
@@ -41,14 +41,14 @@ vorpal
           });
 
 vorpal
-  .command('pub', 'Check local address')
+  .command('pub', 'Check local address.')
   .action(function(args, callback){
             console.log(rsa.keys.pub);
             callback();
           });
 
 vorpal
-  .command('detail <index>', 'Show block detail')
+  .command('detail <index>', 'Show block detail.')
   .action(function(args, callback){
             let block = blockChain.blockChain[args.index];
             this.log(JSON.stringify(block, null, 2));
@@ -56,7 +56,7 @@ vorpal
           });
 
 vorpal
-  .command('mine', 'Generate a new block')
+  .command('mine', 'Generate a new block.')
   .action(function(args, callback){
             let newBlock = blockChain.mine(rsa.keys.pub);
             if(newBlock) {
@@ -66,14 +66,14 @@ vorpal
           });
 
 vorpal
-  .command('blockChain', 'Show chain')
+  .command('blockChain', 'Show chain.')
   .action(function(args, callback){
             formatLog(blockChain.blockChain);
             callback();
           });
 
 vorpal
-  .command('peers', 'Show peer list')
+  .command('peers', 'Show peer list.')
   .action(function(args, callback){
             formatLog(blockChain.peers);
             callback();
@@ -81,7 +81,7 @@ vorpal
 
 
 vorpal
-  .command('trans <to> <amount>', 'Make a transfer')
+  .command('trans <to> <amount>', 'Make a transfer.')
   .action(function(args, callback){
             let trans = blockChain.transfer(rsa.keys.pub, args.to, args.amount);
             if(trans) formatLog(trans);
@@ -89,7 +89,7 @@ vorpal
           });
 
 vorpal
-  .command('chat <msg>', 'Send broadcast')
+  .command('chat <msg>', 'Send broadcast.')
   .action(function(args, callback){
             formatLog(blockChain.broadcast({
               type: 'hi',
@@ -99,7 +99,7 @@ vorpal
           });
 
 vorpal
-  .command('pending', 'Show pending transfer')
+  .command('pending', 'Show pending transfer.')
   .action(function(args, callback){
             formatLog(blockChain.data);
             callback();

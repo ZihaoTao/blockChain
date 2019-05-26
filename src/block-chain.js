@@ -2,7 +2,7 @@
 * @Author: tino
 * @Date:   2019-05-24 16:22:49
 * @Last Modified by:   Zihao Tao
-* @Last Modified time: 2019-05-25 18:54:17
+* @Last Modified time: 2019-05-26 11:41:08
 */
 const crypto = require('crypto');
 const dgram = require('dgram');
@@ -19,11 +19,16 @@ const initBlock = { index: 0,
 class BlockChain {
   constructor() {
     this.blockChain = [initBlock];
+    // data of pending transaction
     this.data = [];
+    // difficulty of solving question to finish mining
     this.difficulty = 4;
     this.peers = [];
+    // record the last remote address
     this.remote = '';
+    // seed node info
     this.seed = {address: '47.254.23.123', port: 8002}; // server host
+    // udp socket
     this.udp = dgram.createSocket('udp4');
     this.init();
   }
@@ -55,7 +60,7 @@ class BlockChain {
   // add node to p2p
   startNode(port) {
     this.udp.bind(port);
-    // if not a seed node
+    // if it is not a seed node
     if(port !== 8002) {
       this.send({
         type: 'newPeer'
@@ -312,7 +317,7 @@ class BlockChain {
 
   }
   
-  // compute has based on parameters
+  // compute hash based on the parameters
   computeHash(index, prevHash, timestamp, data, nounce) {
     return crypto.createHash('sha256').update(index + prevHash + timestamp + data + nounce).digest('hex');
   }
@@ -335,7 +340,7 @@ class BlockChain {
     if(JSON.stringify(chain[0]) !== JSON.stringify(initBlock)) {
       return false;
     } 
-
+    // check block from tail to head
     for(let i = chain.length - 1; i >= 1; i--) {
       if(!this.isValidBlock(chain[i], chain[i - 1])) {
         return false;
@@ -347,6 +352,7 @@ class BlockChain {
   
   // update chain
   replaceChain(newChain) {
+    // if it is init block
     if(newChain.length == 1) return;
     if(this.isValidChain(newChain) && newChain.length > this.blockChain.length) {
       this.blockChain = JSON.parse(JSON.stringify(newChain));
