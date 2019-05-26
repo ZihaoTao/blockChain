@@ -1,8 +1,8 @@
 /*
 * @Author: tino
 * @Date:   2019-05-24 17:34:50
-* @Last Modified by:   tino
-* @Last Modified time: 2019-05-25 16:49:59
+* @Last Modified by:   Zihao Tao
+* @Last Modified time: 2019-05-25 17:06:20
 */
 const vorpal = require('vorpal')();
 const BlockChain = require('./block-chain');
@@ -90,7 +90,7 @@ vorpal
 vorpal
   .command('chat <msg>', 'Show peer list')
   .action(function(args, callback){
-            formatLog(blockChain.boardcast({
+            formatLog(blockChain.broadcast({
               type: 'hi',
               data: args.msg
             }));
